@@ -1,15 +1,20 @@
 import PropTypes from 'prop-types';
 import { toast, Toaster } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/contactsSlice';
+import { deleteContact, editContact } from 'redux/contactsSlice';
 import { Text, Button } from './Contact.styled';
 
 export const Contact = ({ contact: { id, name, number } }) => {
   const dispatch = useDispatch();
 
-  const handleDelete = id => {
+  const handleDelete = () => {
     dispatch(deleteContact(id));
     toast.success('Contact was deleted!');
+  };
+
+  const handleEdit = () => {
+    toast.success('Okay, do your edits');
+    dispatch(editContact(id));
   };
 
   return (
@@ -17,8 +22,11 @@ export const Contact = ({ contact: { id, name, number } }) => {
       <Text>
         {name}: {number}
       </Text>
-      <Button type="button" onClick={() => handleDelete(id)}>
+      <Button type="button" onClick={handleDelete}>
         Delete
+      </Button>
+      <Button type="button" onClick={handleEdit}>
+        Edit
       </Button>
       <Toaster />
     </>

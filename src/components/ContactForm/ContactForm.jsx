@@ -22,7 +22,7 @@ export const ContactForm = () => {
   const contacts = useSelector(getContacts);
 
   const handleSubmit = (values, { resetForm }) => {
-    if (contacts.find(contact => contact.name === values.name)) {
+    if (contacts.some(contact => contact.name === values.name)) {
       toast.error(`Sorry, ${values.name} is already in contacts.`);
       return;
     }
